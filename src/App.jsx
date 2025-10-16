@@ -29,29 +29,29 @@ function App() {
   if (!status || status === "WAITING")
     return <div class="nomatch">Next match will start shortly</div>;
   return (
-    <div class="scorecontainer">
-      <div class={`playerA ${playerA.break ? "break" : ""}`}>
-        <div class="flag center">
+    <div className="scorecontainer">
+      <div className={`player playerA ${playerA.break ? "break" : ""}`}>
+        <div className="flag center">
           <img src={playerA.flag} />
         </div>
-        <div class="name center">
+        <div className="name center">
           {playerA.name}
           {playerA.runouts ? (
-            <span class="runouts">R{playerA.runouts}</span>
+            <span className="runouts">R{playerA.runouts}</span>
           ) : null}
         </div>
-        <div class="score">{playerA.score}</div>
+        <div className="score">{playerA.score}</div>
       </div>
-      <div class="raceto center">Race to {raceTo}</div>
-      <div class={`playerB ${playerB.break ? "break" : ""}`}>
-        <div class="score">{playerB.score}</div>
-        <div class="name center">
+      <div className="raceto center">Race to {raceTo}</div>
+      <div className={`player playerB ${playerB.break ? "break" : ""}`}>
+        <div className="score">{playerB.score}</div>
+        <div className="name center">
           {playerB.name}
           {playerB.runouts ? (
-            <span class="runouts">R{playerB.runouts}</span>
+            <span className="runouts">R{playerB.runouts}</span>
           ) : null}
         </div>
-        <div class="flag center">
+        <div className="flag center">
           <img src={playerB.flag} />
         </div>
       </div>
