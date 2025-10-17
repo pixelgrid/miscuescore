@@ -3,7 +3,7 @@ import ReactGA from "react-ga4";
 import './App.css'
 // import dummy_data from './data'
 
-ReactGA.initialize("G-EVDFHTRBQ5");
+ReactGA.initialize("G-XT75HB2TKV");
 
 function TableIDInput({ onSubmit }) {
   const [value, setValue] = useState("");
