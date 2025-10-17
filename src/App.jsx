@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import ReactGA from "react-ga4";
 import './App.css'
-import dummy_data from './data'
+// import dummy_data from './data'
+
+ReactGA.initialize("G-EVDFHTRBQ5");
 
 function TableIDInput({ onSubmit }) {
   const [value, setValue] = useState("");
@@ -36,6 +39,7 @@ function App() {
         </div>
         <div className="name center">
           {playerA.name}
+          {playerA.handicap ? (<span className="handicap">({playerA.handicap})</span> ) : null}
           {playerA.runouts ? (
             <span className="runouts">R{playerA.runouts}</span>
           ) : null}
@@ -47,6 +51,7 @@ function App() {
         <div className="score">{playerB.score}</div>
         <div className="name center">
           {playerB.name}
+          {playerB.handicap ? (<span className="handicap">({playerB.handicap})</span> ) : null}
           {playerB.runouts ? (
             <span className="runouts">R{playerB.runouts}</span>
           ) : null}
@@ -78,11 +83,11 @@ function useFetchData(tableID) {
   useEffect(() => {
     async function fetchMetadata() {
       if (!tableID) return;
-      const data = await fetch(
+      /*const data = await fetch(
         `https://api.codetabs.com/v1/proxy?quest=https://cuescore.com/ajax/scoreboard/overlay-v2.php?tableId=${tableID}`
       ).then((res) => res.json());
-
-      // const data = DATA;
+*/
+      const data = dummy_data; // For testing without API
 
       const status = data.status;
       if (!status || status === "WAITING") return setMetadata({ status });
@@ -95,14 +100,16 @@ function useFetchData(tableID) {
         flag: data.match.playerA.country.image,
         score: data.match.scoreA,
         runouts: Number(data.match.runoutsA),
-        break: breaking === "A" ? true : false
+        break: breaking === "A" ? true : false,
+        handicap: data.match.handicapA
       };
       const playerB = {
         name: data.match.playerB.name,
         flag: data.match.playerB.country.image,
         score: data.match.scoreB,
         runouts: Number(data.match.runoutsB),
-        break: breaking === "B" ? true : false
+        break: breaking === "B" ? true : false,
+        handicap: data.match.handicapB
       };
 
       setMetadata({
