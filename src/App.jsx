@@ -28,6 +28,9 @@ function App() {
   const [tableID, setTableID] = useState(params.get("tableID"));
   const { playerA, playerB, raceTo, status } = useFetchData(tableID);
 
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: document.location.pathname + document.location.search });
+  }, []);
   if (!tableID) return <TableIDInput onSubmit={setTableID} />;
   if (!status || status === "WAITING")
     return <div class="nomatch">Next match will start shortly</div>;
