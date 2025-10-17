@@ -3,8 +3,6 @@ import ReactGA from "react-ga4";
 import './App.css'
 // import dummy_data from './data'
 
-ReactGA.initialize("G-XT75HB2TKV");
-
 function TableIDInput({ onSubmit }) {
   const [value, setValue] = useState("");
   return (
@@ -29,6 +27,7 @@ function App() {
   const { playerA, playerB, raceTo, status } = useFetchData(tableID);
 
   useEffect(() => {
+    ReactGA.initialize("G-XT75HB2TKV");
     ReactGA.send({ hitType: "pageview", page: document.location.pathname + document.location.search });
   }, []);
   if (!tableID) return <TableIDInput onSubmit={setTableID} />;
