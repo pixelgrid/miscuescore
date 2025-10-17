@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ReactGA from "react-ga4";
 import './App.css'
 // import dummy_data from './data'
-
+let DATA_COLLECTED = false;
 const TrackGoogleAnalyticsEvent = (
     category,
     event_name,
@@ -48,7 +48,7 @@ function App() {
   }, []);
   if (!tableID) return <TableIDInput onSubmit={setTableID} />;
   if (!status || status === "WAITING")
-    return <div class="nomatch">Next match will start shortly</div>;
+    return <div className="nomatch">Next match will start shortly</div>;
   return (
     <div className="scorecontainer">
       <div className={`player playerA ${playerA.break ? "break" : ""}`}>
@@ -128,17 +128,21 @@ function useFetchData(tableID) {
         handicap: data.match.handicapB
       };
 
-      TrackGoogleAnalyticsEvent(
-        "data_fetched",
-        "completed",
-        window.location.pathname + window.location.search,
-        {
-          venue_name: data.venueName,
-          venue_id: data.venueId,
-          discipline: data.tournament.discipline,
-          tournament_id: data.tournament.tournamentId
-        }
-      );
+      if (!DATA_COLLECTED){
+        DATA_COLLECTED = true;
+        TrackGoogleAnalyticsEvent(
+          "data_fetched",
+          "completed",
+          window.location.pathname + window.location.search,
+          {
+            venue_name: data.venueName,
+            venue_id: data.venueId,
+            discipline: data.tournament.discipline,
+            tournament_id: data.tournament.tournamentId
+          }
+        );
+      }
+      
 
       setMetadata({
         status,
