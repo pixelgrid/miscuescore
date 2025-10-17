@@ -83,11 +83,9 @@ function useFetchData(tableID) {
   useEffect(() => {
     async function fetchMetadata() {
       if (!tableID) return;
-      /*const data = await fetch(
+      const data = await fetch(
         `https://api.codetabs.com/v1/proxy?quest=https://cuescore.com/ajax/scoreboard/overlay-v2.php?tableId=${tableID}`
       ).then((res) => res.json());
-*/
-      const data = dummy_data; // For testing without API
 
       const status = data.status;
       if (!status || status === "WAITING") return setMetadata({ status });
