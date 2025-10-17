@@ -3,6 +3,22 @@ import ReactGA from "react-ga4";
 import './App.css'
 // import dummy_data from './data'
 
+const TrackGoogleAnalyticsEvent = (
+    category,
+    event_name,
+    label,
+    data
+) => {
+    console.log("GA event:", category, ":", event_name, ":", label);
+
+    let event_params = {
+        category,
+        label,
+        ...data
+    };
+    // Send GA4 Event
+    ReactGA.event(event_name, event_params);
+};
 function TableIDInput({ onSubmit }) {
   const [value, setValue] = useState("");
   return (
@@ -111,6 +127,18 @@ function useFetchData(tableID) {
         break: breaking === "B" ? true : false,
         handicap: data.match.handicapB
       };
+
+      TrackGoogleAnalyticsEvent(
+        "data_fetched",
+        "completed",
+        window.location.pathname + window.location.search,
+        {
+          venue_name: data.venueName,
+          venue_id: data.venueId,
+          discipline: data.tournament.discipline,
+          tournament_id: data.tournament.tournamentId
+        }
+      );
 
       setMetadata({
         status,
