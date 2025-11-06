@@ -48,7 +48,7 @@ function App() {
   const [tableID, setTableID] = useState(params.get("tableID"));
   const { playerA, playerB, raceTo, status, tournamentId, matchId } = useFetchData(tableID);
   const shouldFetchIndividualMatches = params.get("o") && isLeagueMatch(tournamentId);
-  const individualMatchData = useIndividualMatchData(shouldFetchIndividualMatches, tournamentId, matchId);
+  const individualMatchData = useIndividualMatchData(shouldFetchIndividualMatches, tournamentId, matchId).filter(m => m.status !== 'waiting');
 
   useEffect(() => {
     ReactGA.initialize("G-XT75HB2TKV");
