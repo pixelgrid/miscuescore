@@ -136,3 +136,77 @@ input {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.individual-matches{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 400px;
+}
+
+.individual-match {
+    display: grid;
+    grid-template-columns: 4fr 2fr 4fr;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: rgb(41, 41, 41);
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+.individual-match.finished {
+  background: rgb(36, 58, 116);
+  color: white;
+}
+.individual-match.running {
+  background: rgb(70, 125, 247);
+  color: white;
+}
+span.pA {
+    display: flex;
+    align-items: center;
+}
+
+.rt{
+    position: relative;
+    margin: 0;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.race-to {
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 35px;
+    margin: 0 10px;
+}
+
+span.scoreA, span.scoreB {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+img.discipline {
+    width: 30px;
+    margin-right: 10px;
+}
+
+span.pB {
+    text-align: right;
+}
+
+.race-to.winner-1 .scoreA {
+    color: rgb(255, 152, 0);
+}
+
+.race-to.winner-2 .scoreB {
+    color: rgb(255, 152, 0);
+}
+
+.scoreA,.scoreB{
+  font-size: 20px;
+}

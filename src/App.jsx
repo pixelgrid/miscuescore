@@ -3,6 +3,8 @@ import ReactGA from "react-ga4";
 import './App.css'
 // import dummy_data from './data'
 let DATA_COLLECTED = false;
+import { useIndividualMatchData } from './hooks/fetch-individual-matches';
+import Discipline from './components/discipline-image';
 const TrackGoogleAnalyticsEvent = (
     category,
     event_name,
@@ -37,20 +39,28 @@ function TableIDInput({ onSubmit }) {
   );
 }
 
+function isLeagueMatch(tournamentId) {
+  return [61204750,61204744,61204738,61204939,61204927,61204921].includes(tournamentId);
+}
+
 function App() {
   let params = new URLSearchParams(document.location.search);
   const [tableID, setTableID] = useState(params.get("tableID"));
-  const { playerA, playerB, raceTo, status } = useFetchData(tableID);
+  const { playerA, playerB, raceTo, status, tournamentId, matchId } = useFetchData(tableID);
+  const shouldFetchIndividualMatches = params.get("o") && isLeagueMatch(tournamentId);
+  const individualMatchData = useIndividualMatchData(shouldFetchIndividualMatches, tournamentId, matchId);
 
   useEffect(() => {
     ReactGA.initialize("G-XT75HB2TKV");
     ReactGA.send({ hitType: "pageview", page: document.location.pathname + document.location.search });
   }, []);
+
   if (!tableID) return <TableIDInput onSubmit={setTableID} />;
   if (!status || status === "WAITING")
     return <div className="nomatch">Next match will start shortly</div>;
   return (
     <div className="scorecontainer">
+      {shouldFetchIndividualMatches && <IndividualMatches matches={individualMatchData} />}:will
       <div className={`player playerA ${playerA.break ? "break" : ""}`}>
         <div className="flag center">
           <img src={playerA.flag} />
@@ -108,6 +118,8 @@ function useFetchData(tableID) {
       const status = data.status;
       if (!status || status === "WAITING") return setMetadata({ status });
       const tournamentName = data.tournament.name;
+      const tournamentId = data.tournament.tournamentId;
+      const matchId = data.match.matchId;
       const raceTo = data.match.raceTo;
       const stage = data.match.roundName;
       const breaking = getBreakingPlayer(data.match.notes);
@@ -150,7 +162,9 @@ function useFetchData(tableID) {
         raceTo,
         playerA,
         playerB,
-        stage
+        stage,
+        tournamentId,
+        matchId
       });
     }
 
@@ -160,5 +174,30 @@ function useFetchData(tableID) {
 
   return metadata;
 }
+
+function IndividualMatches({ matches }) {
+  return (
+    <div className="individual-matches">
+      {matches.map((match, index) => (
+        <div key={index} className={`individual-match ${match.status}`}>
+          <span className="pA">
+            <Discipline discipline={match.discipline} />
+            {match.playerA} 
+          </span>
+          <div className={`race-to winner-${match.winner}`}>
+            <span className="scoreA">{match.scoreA}</span>
+            <span className="rt">({match.raceTo})</span>
+            <span className="scoreB">{match.scoreB}</span>
+          </div>
+          <span className="pB">
+            {match.playerB}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
 
 export default App
