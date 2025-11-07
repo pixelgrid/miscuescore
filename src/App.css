@@ -210,3 +210,60 @@ span.pB {
 .scoreA,.scoreB{
   font-size: 16px;
 }
+
+.multi-set-scoreboard {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13,133,91,1);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.player-row {
+    display: grid;
+}
+
+.player-score, .set-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span.set-score.winner {
+    color: #ffffff;
+}
+
+span.set-score {
+    color: #c8c8c8;
+}
+
+.active-set{
+    background: white;
+}
+
+.active-set .set-score,
+.active-set .set-score.winner {
+    color: rgba(13, 133, 91, 1);
+    font-weight: bold;
+}
+.multi-set-scoreboard .flag{
+  margin-left: 0
+}
+
+.player-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,3 +1,5 @@
+import ReactGA from "react-ga4";
+
 export const TrackGoogleAnalyticsEvent = (
     category,
     event_name,

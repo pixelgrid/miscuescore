@@ -1,3 +1,3 @@
-export function isMultisetTournament(tournament) {
-    return ['bankpool', 'multiball', 'onepocket'].includes(discipline.toLowerCase());
+export function isMultisetTournament(discipline, bestOfSets) {
+    return ['bankpool', 'multiball', 'onepocket'].includes(discipline.toLowerCase()) && bestOfSets > 1;
 }

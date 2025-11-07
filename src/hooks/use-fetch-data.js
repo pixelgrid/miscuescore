@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { TrackGoogleAnalyticsEvent } from "../utils/track-ga-event";
-let DATA_COLLECTED = false;
 import { getBreakingPlayer } from "../utils/get-breacking-player";
+import { calculateScoreFromNotes } from "../utils/calculate-score-from-notes";
+import { calculateScoreFromSets } from "../utils/calculate-score-from-sets";
+
+let DATA_COLLECTED = false;
+
 export function useFetchData(tableID) {
   const [metadata, setMetadata] = useState({});
   useEffect(() => {
@@ -19,6 +23,7 @@ export function useFetchData(tableID) {
       const raceTo = data.match.raceTo;
       const stage = data.match.roundName;
       const breaking = getBreakingPlayer(data.match.notes);
+      const discipline = data.tournament.discipline;
       const playerA = {
         name: data.match.playerA.name,
         flag: data.match.playerA.country.image,
@@ -36,6 +41,17 @@ export function useFetchData(tableID) {
         handicap: data.match.handicapB
       };
 
+      let setScores = [];
+      const sets = data.match.sets || [];
+      const notes = data.match.notes || [];
+
+      if(sets.length){
+        setsScores = calculateScoreFromSets(sets);
+      }
+      if(notes.length){
+        setScores = calculateScoreFromNotes(notes);
+      }
+
       if (!DATA_COLLECTED){
         DATA_COLLECTED = true;
         TrackGoogleAnalyticsEvent(
@@ -45,7 +61,7 @@ export function useFetchData(tableID) {
           {
             venue_name: data.venueName,
             venue_id: data.venueId,
-            discipline: data.tournament.discipline,
+            discipline,
             tournament_id: data.tournament.tournamentId
           }
         );
@@ -60,7 +76,10 @@ export function useFetchData(tableID) {
         playerB,
         stage,
         tournamentId,
-        matchId
+        matchId,
+        discipline,
+        sets: setScores,
+        bestOfSets: data.match.bestOfSets || 0
       });
     }
 

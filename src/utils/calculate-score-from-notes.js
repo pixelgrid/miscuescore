@@ -10,9 +10,15 @@ export function calculateScoreFromNotes(notes) {
         if(note.note.match("set end")){
             const [A, B] = currentSet;
             const winner = A === B ? 0 : A > B ? 1 : 2;
-            sets.push([{A, B, winner}])
+            sets.push({A, B, winner})
             currentSet = [0, 0]
         }
+    }
+    // first set has not ended yet
+    if(currentSet[0] !==0 || currentSet[1] !==0){
+        const [A, B] = currentSet;
+        const winner = 0;
+        sets.push({A, B, winner})
     }
     return sets;
 }
