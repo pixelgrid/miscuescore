@@ -41,12 +41,12 @@ export function useFetchData(tableID) {
         handicap: data.match.handicapB
       };
 
-      let setScores = [];
+      let setScores = [{ A: playerA.score, B: playerA.score, winner: 0 }];
       const sets = data.match.sets || [];
       const notes = data.match.notes || [];
 
       if(sets.length){
-        setsScores = calculateScoreFromSets(sets);
+        setScores = calculateScoreFromSets(sets);
       }
       if(notes.length){
         setScores = calculateScoreFromNotes(notes);
