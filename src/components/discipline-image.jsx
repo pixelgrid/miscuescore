@@ -3,7 +3,7 @@ import nineballImage from '../assets/balls/9ball.png'
 import tenballImage from '../assets/balls/10ball.png'
 import fourteenballImage from '../assets/balls/straight.png'
 
-export default function Discipline({discipline}){
+export function Discipline({discipline}){
   switch (discipline){
     case 2:
     case '2':
