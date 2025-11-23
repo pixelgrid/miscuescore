@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TrackGoogleAnalyticsEvent } from "../utils/track-ga-event";
-import { getBreakingPlayer } from "../utils/get-breacking-player";
+import { getPlayerTurn } from "../utils/get-player-turn";
 import { calculateScoreFromNotes } from "../utils/calculate-score-from-notes";
 import { calculateScoreFromSets } from "../utils/calculate-score-from-sets";
 
@@ -22,7 +22,7 @@ export function useFetchData(tableID) {
       const matchId = data.match.matchId;
       const raceTo = data.match.raceTo;
       const stage = data.match.roundName;
-      const breaking = getBreakingPlayer(data.match.notes);
+      const breaking = getPlayerTurn(data.match.notes);
       const discipline = data.tournament.discipline;
       const playerA = {
         name: data.match.playerA.name,

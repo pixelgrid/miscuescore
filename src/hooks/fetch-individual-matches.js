@@ -15,7 +15,7 @@ export function useIndividualMatchData(shouldFetch, tournamentId, matchId){
     if(shouldFetch){
       fetchHtml(tournamentId, matchId);
     }
-  }, []);
+  }, [shouldFetch, tournamentId, matchId]);
   return matches;
 }
 
