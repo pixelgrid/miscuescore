@@ -47,8 +47,7 @@ export function useFetchData(tableID) {
 
       if(sets.length){
         setScores = calculateScoreFromSets(sets);
-      }
-      if(notes.length){
+      } else if(notes.length){
         setScores = calculateScoreFromNotes(notes);
       }
 
