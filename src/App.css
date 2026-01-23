@@ -33,8 +33,8 @@ body {
 
 .scorecontainer {
   width: 90%;
-  height: 50px;
   display: flex;
+  flex-flow: column;
   position: relative;
   overflow: hidden;
 }
@@ -266,4 +266,27 @@ span.set-score {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.potted-balls-indicator img {
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+}
+.potted-balls-indicator {
+    padding: 5px 8px;
+    background: white;
+    display: flex;
+    gap: 10px;
+    width: auto;
+    border-radius: 27px;
+    margin: auto;
+    margin-top: 5px;
+}
+.scoreboard{
+  display: flex;
+  height: 50px;
+}
+.potted {
+  opacity: 0;
 }

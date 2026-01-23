@@ -3,6 +3,7 @@ import { TrackGoogleAnalyticsEvent } from "../utils/track-ga-event";
 import { getPlayerTurn } from "../utils/get-player-turn";
 import { calculateScoreFromNotes } from "../utils/calculate-score-from-notes";
 import { calculateScoreFromSets } from "../utils/calculate-score-from-sets";
+import {calculatePottedBalls} from "../utils/calculate-potted-balls";
 
 let DATA_COLLECTED = false;
 
@@ -50,6 +51,7 @@ export function useFetchData(tableID) {
       } else if(notes.length){
         setScores = calculateScoreFromNotes(notes);
       }
+      const pottedBalls = calculatePottedBalls(notes);
 
       if (!DATA_COLLECTED){
         DATA_COLLECTED = true;
@@ -78,7 +80,8 @@ export function useFetchData(tableID) {
         matchId,
         discipline,
         sets: setScores,
-        bestOfSets: data.match.bestOfSets || 0
+        bestOfSets: data.match.bestOfSets || 0,
+        pottedBalls
       });
     }
 

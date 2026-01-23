@@ -1,14 +1,11 @@
-import { useIndividualMatchData } from '../hooks/fetch-individual-matches';
-import { IndividualMatches } from './individual-matches.jsx';
-import { isLeagueMatch } from '../utils/is-league-match.js';
+import React from 'react';
+import PottedBallsIndicator from './potted-balls-indicator.jsx';
 
-export function SingleSetScoreboard({ playerA, playerB, raceTo, set, tournamentId, matchId}) {
-    let params = new URLSearchParams(document.location.search);
-    const shouldFetchIndividualMatches = params.get("o") && isLeagueMatch(tournamentId);
-    const individualMatchData = useIndividualMatchData(shouldFetchIndividualMatches, tournamentId, matchId).filter(m => m.status !== 'waiting');
-
+export function SingleSetScoreboard({ playerA, playerB, raceTo, pottedBalls}) {
+    const params = new URLSearchParams(document.location.search);
+    const showPottedBalls = !!params.has("pottedballs");
     return  <div className="scorecontainer">
-      {shouldFetchIndividualMatches && <IndividualMatches matches={individualMatchData} />}
+      <div className="scoreboard">
       <div className={`player playerA ${playerA.break ? "break" : ""}`}>
         <div className="flag center">
           <img src={playerA.flag} />
@@ -36,5 +33,7 @@ export function SingleSetScoreboard({ playerA, playerB, raceTo, set, tournamentI
           <img src={playerB.flag} />
         </div>
       </div>
+      </div>
+      {showPottedBalls && <PottedBallsIndicator pottedBalls={pottedBalls} />}
     </div>
 }

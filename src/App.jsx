@@ -12,7 +12,18 @@ import { isMultisetTournament } from './utils/is-multiset-tournament';
 function App() {
   let params = new URLSearchParams(document.location.search);
   const [tableID, setTableID] = useState(params.get("tableID"));
-  const { playerA, playerB, raceTo, status, tournamentId, matchId, discipline, sets, bestOfSets } = useFetchData(tableID);
+  const { 
+    playerA, 
+    playerB, 
+    raceTo, 
+    status, 
+    tournamentId, 
+    matchId, 
+    discipline, 
+    sets, 
+    bestOfSets,
+    pottedBalls
+  } = useFetchData(tableID);
   const isMultiset = isMultisetTournament(discipline || '', bestOfSets);
 
   useEffect(() => {
@@ -26,7 +37,14 @@ function App() {
   return (
     isMultiset ? 
       <MultiSetScoreboard sets={sets} playerA={playerA} playerB={playerB} raceTo={raceTo} /> :
-      <SingleSetScoreboard playerA={playerA} playerB={playerB} raceTo={raceTo} tournamentId={tournamentId} matchId={matchId}/>
+      <SingleSetScoreboard 
+        playerA={playerA}
+        playerB={playerB}
+        raceTo={raceTo}
+        tournamentId={tournamentId}
+        matchId={matchId}
+        pottedBalls={pottedBalls}
+      />
   );
 }
 
