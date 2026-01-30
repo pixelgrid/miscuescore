@@ -51,7 +51,6 @@ export function useFetchData(tableID) {
       } else if(notes.length){
         setScores = calculateScoreFromNotes(notes);
       }
-      const pottedBalls = calculatePottedBalls(notes);
 
       if (!DATA_COLLECTED){
         DATA_COLLECTED = true;
@@ -67,7 +66,6 @@ export function useFetchData(tableID) {
           }
         );
       }
-      
 
       setMetadata({
         status,
@@ -81,7 +79,6 @@ export function useFetchData(tableID) {
         discipline,
         sets: setScores,
         bestOfSets: data.match.bestOfSets || 0,
-        pottedBalls
       });
     }
 

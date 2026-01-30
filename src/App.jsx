@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import ReactGA from "react-ga4";
 import './App.css'
-// import dummy_data from './data'
 
 import { SingleSetScoreboard } from './components/single-set-scoreboard';
 import { MultiSetScoreboard } from './components/multi-set-scoreboard';
@@ -11,7 +10,7 @@ import { isMultisetTournament } from './utils/is-multiset-tournament';
 
 function App() {
   let params = new URLSearchParams(document.location.search);
-  const [tableID, setTableID] = useState(params.get("tableID"));
+  const [tableID, setTableID] = useState(params.get("tableID") || params.get("t") || '');
   const { 
     playerA, 
     playerB, 
@@ -22,7 +21,6 @@ function App() {
     discipline, 
     sets, 
     bestOfSets,
-    pottedBalls
   } = useFetchData(tableID);
   const isMultiset = isMultisetTournament(discipline || '', bestOfSets);
 
@@ -43,7 +41,6 @@ function App() {
         raceTo={raceTo}
         tournamentId={tournamentId}
         matchId={matchId}
-        pottedBalls={pottedBalls}
       />
   );
 }
