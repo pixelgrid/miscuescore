@@ -9,7 +9,7 @@ export function SingleSetScoreboard({ playerA, playerB, raceTo}) {
 
     switch(skin) {
         case "rb":
-          return <RailbirdsScoreboard playerA={playerA} playerB={playerB} raceTo={raceTo}/>
+          return <RailbirdsScoreboard playerA={playerA} playerB={playerB} raceTo={raceTo} extraInfoA={`Runouts: ${playerA.runouts ?? 0}`} extraInfoB={`Runouts: ${playerB.runouts ?? 0}`} />
 
         default:
           return <MatchroomScoreboard playerA={playerA} playerB={playerB} raceTo={raceTo} showPottedBalls={showPottedBalls} />

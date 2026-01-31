@@ -296,6 +296,7 @@ span.set-score {
   .scoreboard{
     height: 100px;
     font-weight: bold;
+    transform: scale(0.8);
   }
   .raceto{
     display: flex;
