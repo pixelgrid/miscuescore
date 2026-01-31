@@ -292,6 +292,14 @@ span.set-score {
 }
 
 .railbirds {
+  --a-primary-color: var(--color-a, #ca3a39);
+  --a-secondary-color: hsl(from var(--a-primary-color) h s calc(l - 8));
+  --a-tertiary-color: hsl(from var(--a-primary-color) h s calc(l - 18));
+
+  --b-primary-color: var(--color-b, #2f76c3);
+  --b-secondary-color: hsl(from var(--b-primary-color) h s calc(l - 8));
+  --b-tertiary-color: hsl(from var(--b-primary-color) h s calc(l - 18));
+
   max-width: 1000px;
   .scoreboard{
     height: 100px;
@@ -335,10 +343,10 @@ span.set-score {
     width: calc((1000px - 300px) / 2);
   }
   .playerA {
-    background-color: #852222;
+    background-color: var(--a-tertiary-color);
     border: none;
     .name {
-      background-color: #b03230;
+      background-color: var(--a-secondary-color);
       text-align: right;
     }
     .extras {
@@ -346,16 +354,16 @@ span.set-score {
     }
   }
   .scoreA{
-    background-color: #ca3a39;
+    background-color: var(--a-primary-color);
   }
   .scoreB{
-    background-color: #2f76c3;
+    background-color: var(--b-primary-color);
   }
   .playerB {
-    background-color: #1e4b82;
+    background-color: var(--b-tertiary-color);
     border: none;
     .name {
-      background-color: #2866a8;
+      background-color: var(--b-secondary-color);
       text-align: left;
     }
   }
