@@ -6,7 +6,6 @@ import { SingleSetScoreboard } from './components/single-set-scoreboard';
 import { MultiSetScoreboard } from './components/multi-set-scoreboard';
 import { useFetchData } from './hooks/use-fetch-data';
 import { TableIDInput } from './components/table-id-input';
-import { isMultisetTournament } from './utils/is-multiset-tournament';
 
 function App() {
   let params = new URLSearchParams(document.location.search);
@@ -22,7 +21,7 @@ function App() {
     sets, 
     bestOfSets,
   } = useFetchData(tableID);
-  const isMultiset = isMultisetTournament(discipline || '', bestOfSets);
+  const isMultiset = bestOfSets > 0;
 
   useEffect(() => {
     ReactGA.initialize("G-XT75HB2TKV");
@@ -34,7 +33,13 @@ function App() {
     return <div className="nomatch">Next match will start shortly</div>;
   return (
     isMultiset ? 
-      <MultiSetScoreboard sets={sets} playerA={playerA} playerB={playerB} raceTo={raceTo} /> :
+      <MultiSetScoreboard 
+        sets={sets} 
+        playerA={playerA} 
+        playerB={playerB} 
+        raceTo={raceTo} 
+        discipline={discipline} 
+      /> :
       <SingleSetScoreboard 
         playerA={playerA}
         playerB={playerB}
