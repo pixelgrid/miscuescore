@@ -8,8 +8,16 @@ Currently there are three versions available
 
 
 2. Railbirds style
+It also supports multiset tournaments having different info for games that have a ball count like onepocket and bankpool.
 
+Regular race
+<img width="879" height="124" alt="image" src="https://github.com/user-attachments/assets/1da36b88-e568-4711-abcd-916235940d52" />
+
+Multiset
 <img width="856" height="105" alt="image" src="https://github.com/user-attachments/assets/4e90d8d4-c41b-4ee5-a733-440379b8d328" />
+
+Multiset for onepocket or bankpool
+<img width="878" height="118" alt="image" src="https://github.com/user-attachments/assets/7afdea4f-e1c6-41df-b925-6c8affc9a4b6" />
 
 
 3. Multiset style
