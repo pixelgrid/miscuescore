@@ -40,7 +40,6 @@ body {
 }
 .player{
   font-size: 18px;
-  background: #130c60;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,9 +48,11 @@ body {
 }
 .playerA {
   border-left: 10px solid white;
+  background: var(--color-a, #130c60);
 }
 .playerB {
   border-right: 10px solid white;
+  background: var(--color-b, #130c60);
 }
 .raceto {
   width: 120px;
@@ -216,7 +217,7 @@ span.pB {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(13,133,91,1);
+  background: var(--color-a, rgba(13,133,91,1));
   padding: 10px;
   border-radius: 5px;
   font-size: 20px;
@@ -255,7 +256,7 @@ span.set-score {
 
 .active-set .set-score,
 .active-set .set-score.winner {
-    color: rgba(13, 133, 91, 1);
+    color: var(--color-a, rgba(13, 133, 91, 1));
     font-weight: bold;
 }
 .multi-set-scoreboard .flag{
