@@ -3,15 +3,13 @@ import { TrackGoogleAnalyticsEvent } from "../utils/track-ga-event";
 import { getPlayerTurn } from "../utils/get-player-turn";
 import { calculateScoreFromNotes } from "../utils/calculate-score-from-notes";
 import { calculateScoreFromSets } from "../utils/calculate-score-from-sets";
-import {calculatePottedBalls} from "../utils/calculate-potted-balls";
 
 let DATA_COLLECTED = false;
 
 const URL_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
-const URL_PROXY_ALT = "https://corsproxy.io/?url=";
-const URL_PROXY_ALT_2 = "https://test.cors.workers.dev/?";
+const URL_PROXY_ALT = "https://test.cors.workers.dev/?";
 
-const PROXY_URLS = [URL_PROXY, URL_PROXY_ALT, URL_PROXY_ALT_2];
+const PROXY_URLS = [URL_PROXY, URL_PROXY_ALT];
 export function useFetchData(tableID) {
   const [metadata, setMetadata] = useState({});
   const proxyURLIndex = useRef(0);
@@ -22,7 +20,7 @@ export function useFetchData(tableID) {
         `${PROXY_URLS[proxyURLIndex.current]}https://cuescore.com/ajax/scoreboard/overlay-v2.php?tableId=${tableID}`
       ,{signal: AbortSignal.timeout(5000)}).then((res) => res.json()).catch((err) => {
         proxyURLIndex.current = (proxyURLIndex.current + 1) % PROXY_URLS.length;
-      });
+      }).catch(console.log);
       if (!data) return;
 
       const status = data.status;
