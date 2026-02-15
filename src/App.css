@@ -302,10 +302,17 @@ span.set-score {
   --b-tertiary-color: hsl(from var(--b-primary-color) h s calc(l - 18));
 
   max-width: 1000px;
+
   .scoreboard{
     height: 100px;
     font-weight: bold;
+  }
+  &.scorecontainer{
     transform: scale(0.8);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
   }
   .raceto{
     display: flex;
@@ -385,5 +392,10 @@ span.set-score {
     padding: 5px 10px;
     width: 100%;
     box-sizing: border-box;
+  }
+  .tournament-info {
+    background-color: black;
+    padding: 5px;
+    text-align: center;
   }
 }

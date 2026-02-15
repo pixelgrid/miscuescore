@@ -1,6 +1,7 @@
 
-export function RailbirdsScoreboard({ playerA, playerB, raceTo, extraInfoA = '', extraInfoB = '' }) {
+export function RailbirdsScoreboard({ playerA, playerB, raceTo, extraInfoA = '', extraInfoB = '', tournamentInfo = '' }) {
       return  (<div className="scorecontainer railbirds">
+        {tournamentInfo && <div className="tournament-info">{tournamentInfo}</div>}
       <div className="scoreboard">
         <div className={`player playerA`}>
                 <div className="name">{playerA.name}</div>

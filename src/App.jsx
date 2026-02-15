@@ -20,6 +20,7 @@ function App() {
     discipline, 
     sets, 
     bestOfSets,
+    tournamentInfo
   } = useFetchData(tableID);
   const isMultiset = bestOfSets > 0;
 
@@ -39,6 +40,7 @@ function App() {
         playerB={playerB} 
         raceTo={raceTo} 
         discipline={discipline} 
+        tournamentId={tournamentId}
       /> :
       <SingleSetScoreboard 
         playerA={playerA}
@@ -46,6 +48,7 @@ function App() {
         raceTo={raceTo}
         tournamentId={tournamentId}
         matchId={matchId}
+        tournamentInfo={tournamentInfo}
       />
   );
 }
