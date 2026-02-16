@@ -52,8 +52,15 @@ export function useFetchData(tableID) {
       let setScores = [{ A: playerA.score, B: playerA.score, winner: 0 }];
       const sets = data.match.sets || [];
       const notes = data.match.notes || [];
-      const tournamentInfo = `${data.venueName} | ${data.tournament.displayDate} | ${data.tournament.name} | ${stage} | Table ${data.match.table.name}`;
-
+      const isChallenge = !!data?.challenge?.challengeId;
+      let tournamentInfo;
+      
+      if(!isChallenge){
+        tournamentInfo = [data.venueName, data.tournament.displayDate, data.tournament.name, stage, `Table ${data.match.table.name}`].filter(Boolean).join(" | ");
+      } else {
+        tournamentInfo = [data.venueName, data.challenge.name, "Challenge Match", `Table ${data.match.table.name}`].filter(Boolean).join(" | ");
+      }
+      
       if(sets.length){
         setScores = calculateScoreFromSets(sets);
       } else if(notes.length){
