@@ -1,6 +1,22 @@
 # miscuescore
 CS live stream scoreboard
 
+## Usage
+
+1. Get the cuescore overlay url and copy the tableId number  
+example: https://cuescore.com/scoreboard/overlay/?tableId=1234567&lang=en
+
+2. Append the number to the following url  
+https://pixelgrid.github.io/miscuescore/?t=
+
+Using the example from step 1 the url should be  
+https://pixelgrid.github.io/miscuescore/?t=1234567
+
+Optionally if you wan to see the railbirds style version append `&skin=rb` to the url  
+https://pixelgrid.github.io/miscuescore/?t=1234567&skin=rb
+
+
+## Versions
 Currently there are three versions available
 
 1. Matchroom style
